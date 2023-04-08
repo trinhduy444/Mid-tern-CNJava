@@ -1,0 +1,64 @@
+.carousel {
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    min-height: 350px;
+  }
+  .carousel .container .carousel-left img {
+  -o-object-fit: cover;
+     object-fit: cover;
+
+       width: auto;
+       height: 350px;
+  }
+  .carousel .container .carousel-right {
+    margin: auto;
+  }
+  .carousel .container .carousel-right a.btn {
+    border-radius: 0;
+    color: #fff;
+  }
+  .carousel .container .carousel-indicators button {
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    margin: 0 15px;
+  }
+  
+  
+      button a{
+      text-decoration: none;
+    }
+    nav ul li a:hover {
+      color: black !important;
+
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+    }
+
+    header a {
+      color: white !important;
+    }
+
+    .product-div a {
+      text-decoration: none;
+      color: grey;
+    }
+
+    footer a {
+      text-decoration: none;
+    }
+
+    body {
+      background-color: #1c1d28;
+    }
+    .dropdown button{
+		background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden; 
+	}
+        

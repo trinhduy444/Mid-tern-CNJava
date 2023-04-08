@@ -15,5 +15,6 @@
 		<table tableName="account" domainObjectName="Account"></table>
 		<table tableName="product" domainObjectName="Product"></table>
 		<table tableName="orders" domainObjectName="Orders"></table>
+		<table tableName="orders_products" domainObjectName="orders_products"></table>
 	</context>
 </generatorConfiguration>

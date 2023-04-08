@@ -1,4 +1,4 @@
-package com.example.SpringCommerceShop.Config;
+	package com.example.SpringCommerceShop.Config;
 
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;

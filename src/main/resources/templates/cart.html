@@ -212,7 +212,8 @@
                                         <p class="mb-5">Khi bạn đặt hàng đồng nghĩa với việc bạn đồng ý với <a
                                                 href="#!">các điều khoản</a>.</p>
 
-                                        <button type="submit" class="btn btn-primary btn-block btn-lg">Purchase</button>
+                                        <button type="submit" class="btn btn-primary btn-block btn-lg">Check
+                                            out</button>
 
                                         <h5 class="fw-bold mb-5" style="position: absolute; bottom: 0;">
                                             <a href="/"><i class="fas fa-angle-left me-2"></i>Back to shopping</a>
@@ -231,6 +232,23 @@
     </section>
 </body>
 <script>
+    function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+
 
     const delivery = document.querySelector('.delivery');
     delivery.addEventListener('submit', function (event) {
@@ -238,40 +256,47 @@
         var cartItems = JSON.parse(localStorage.getItem('cart')) || [];
 
         document.querySelector('#totalPrice').value = localStorage.getItem('totalPrice');
-        var totalPrice =document.querySelector('#totalPrice').value;
+        var totalPrice = document.querySelector('#totalPrice').value;
 
         var fullname = document.querySelector('#fullname').value;
         var address = document.querySelector('#address').value;
         var email = document.querySelector('#email').value;
         var phone = document.querySelector('#phone').value;
         var password = document.querySelector('#password').value;
-
+        var loginpass = getCookie("loginInfoPass");
 
         //Create order id
         var Order_id = createID(phone);
         document.querySelector('#order_id').value = Order_id;
         var order_id2 = document.querySelector('#order_id').value;
-        if (fullname == '' || address == '' || email == '' || phone == '') {
+        if (fullname == '' || address == '' || email == '' || phone == '' || password == '') {
             alert('Please fill in all the fields');
             event.preventDefault();
         } else {
-
-            var data = {
-                orderid: order_id2,
-                cartItems: cartItems.id,
-                totalPrice: totalPrice,
-                fullname: fullname,
-                address: address,
-                email: email,
-                phone: phone,
-                password: password
+            if (password != loginpass) {
+                alert('Password is incorrect');
+                event.preventDefault();
             }
+            else {
+                var data = {
+                    orderid: order_id2,
+                    cartItems: cartItems.id,
+                    totalPrice: totalPrice,
+                    fullname: fullname,
+                    address: address,
+                    email: email,
+                    phone: phone,
+                    password: password
+                }
+            }
+
+
             localStorage.setItem('data', JSON.stringify(data));
             // delivery.setAttribute('action', '/purchaseSuccess/'+order_id2);
         }
     });
 
-    function createID(phoneNumber){
+    function createID(phoneNumber) {
         var today = new Date();
         var date = today.getDate();
         var month = today.getMonth() + 1;

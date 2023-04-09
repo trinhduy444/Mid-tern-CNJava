@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
@@ -19,9 +19,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
-  <style>
-
-  </style>
+ 
 </head>
 
 <body>
@@ -33,8 +31,8 @@
         </a>
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">Profile</a></li>
+          <li><a href="/" class="nav-link px-2 text-secondary">Home</a></li>
+          <li><a href="/profile" class="nav-link px-2 text-white">Profile</a></li>
           <li><a href="/cart" class="nav-link px-2 text-white">Cart</a></li>
           <li><a href="#" class="nav-link px-2 text-white">About us</a></li>
         </ul>
@@ -46,13 +44,6 @@
 
         <div class="text-end">
 
-          <!-- <a href="/cart">
-            <i><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                class="bi bi-cart-fill" viewBox="0 0 16 16">
-                <path
-                  d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-              </svg> </i>
-          </a> -->
 
           <button onclick="goToCart()" type="button" class="btn btn-light" fdprocessedid="4wtr97">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart"
@@ -64,8 +55,8 @@
             <a href="/cart"></a>
             Cart
           </button>
-          <button type="button" class="btn btn-outline-light me-2"><a href="/haha">Login</a></button>
-          <button type="button" class="btn btn-warning">Sign-up</button>
+          <button type="button" class="btn btn-outline-light me-2" id="login-btn"><a href="/login" style="display: block;">Login</a></button>
+          <button type="button" class="btn btn-warning" id="regis-btn"><a href="/register" style="display: block;">Sign-up</a></button>
         </div>
       </div>
     </div>
@@ -83,15 +74,15 @@
           <hr>
           <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item">
-              <a href="#" class="nav-link active" aria-current="page">
+              <a href="/" class="nav-link active" aria-current="page">
                 <svg class="bi me-2" width="16" height="16">
                   <use xlink:href="#home"></use>
                 </svg>
                 Home
               </a>
             </li>
-            <li>
-              <a href="#" class="nav-link text-white">
+            <li id="dashboard" style="display: none;">
+              <a href="/dashboard" class="nav-link text-white">
                 <svg class="bi me-2" width="16" height="16">
                   <use xlink:href="#speedometer2"></use>
                 </svg>
@@ -99,7 +90,7 @@
               </a>
             </li>
             <li>
-              <a href="#" class="nav-link text-white">
+              <a href="/cart" class="nav-link text-white">
                 <svg class="bi me-2" width="16" height="16">
                   <use xlink:href="#table"></use>
                 </svg>
@@ -115,19 +106,20 @@
               </a>
             </li>
             <div class="dropdown" style="padding-left: 40px;">
-              
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                  Product
-                </button>
-              
+
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Product
+              </button>
+
               <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownMenuButton1">
                 <li><a class="dropdown-item" href="/products/food">Food</a></li>
                 <li><a class="dropdown-item" href="/products/drink">Drink</a></li>
-              
+
               </ul>
             </div>
-            
-            
+
+
           </ul>
           <hr>
           <div class="dropdown">
@@ -139,11 +131,11 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
               <li><a class="dropdown-item" href="#">Settings</a></li>
-              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li><a class="dropdown-item" href="/profile">Profile</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="#">Sign out</a></li>
+              <li><a class="dropdown-item" href="/login" id="sign-out">Sign out</a></li>
             </ul>
           </div>
         </div>
@@ -182,7 +174,7 @@
         </article>
         <div class="row product-div" style="justify-content: center;">
           <div class="col-md-3 card" style="width: 14rem; margin-right: 10px;  margin-bottom: 10px;"
-            th:each="product : ${products}" >
+            th:each="product : ${products}">
             <img th:src="${product.img}" class="card-img-top" alt="..." style="width: auto; height: 180px;">
             <div class="card-body">
               <h5 class="card-title" th:text="${product.name} "></h5>
@@ -197,7 +189,7 @@
         </div>
         <nav>
           <ul class="pagination">
-            <li class="page-item first" th:class="${  .pageNumber == 1 ? 'first disabled' : 'first'}">
+            <li class="page-item first" th:class="${myPageInfo.pageNumber == 1 ? 'first disabled' : 'first'}">
               <a class="page-link" th:href="@{/?(page=1)}" aria-label="First">
                 <span aria-hidden="true">&laquo;</span>
                 <span class="sr-only">First</span>
@@ -236,7 +228,7 @@
               <a class="d-inline-flex align-items-center mb-2 link-dark text-light" href="/" aria-label="Bootstrap">
                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="32" class="d-block me-2" viewBox="0 0 118 94"
                   role="img">
-                  <title>Bootstrap</title>
+                  <title>Risa Shop</title>
                   <path fill-rule="evenodd" clip-rule="evenodd"
                     d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z"
                     fill="currentColor"></path>
@@ -267,34 +259,32 @@
                 <li class="mb-2"><a href="https://cottonbureau.com/people/bootstrap">Swag Store</a></li>
               </ul>
             </div>
+      
             <div class="col-6 col-lg-2 mb-3 text-light">
-              <h5>Guides</h5>
+              <h5>Sản phẩm</h5>
               <ul class="list-unstyled">
-                <li class="mb-2"><a href="/docs/5.0/getting-started/">Getting started</a></li>
-                <li class="mb-2"><a href="/docs/5.0/examples/starter-template/">Starter template</a></li>
-                <li class="mb-2"><a href="/docs/5.0/getting-started/webpack/">Webpack</a></li>
-                <li class="mb-2"><a href="/docs/5.0/getting-started/parcel/">Parcel</a></li>
+                <li class="mb-2"><a href="/">Hamburger</a></li>
+                <li class="mb-2"><a href="/">Drink juice</a></li>
+                <li class="mb-2"><a href="/">Fruit</a></li>
+                <li class="mb-2"><a href="/">KFC</a></li>
+                <li class="mb-2"><a href="/">Pizza Company</a></li>
               </ul>
             </div>
             <div class="col-6 col-lg-2 mb-3 text-light">
-              <h5>Projects</h5>
+              <h5>Theo dõi chúng tôi trên</h5>
               <ul class="list-unstyled">
-                <li class="mb-2"><a href="https://github.com/twbs/bootstrap">Bootstrap 5</a></li>
-                <li class="mb-2"><a href="https://github.com/twbs/bootstrap/tree/v4-dev">Bootstrap 4</a></li>
-                <li class="mb-2"><a href="https://github.com/twbs/icons">Icons</a></li>
-                <li class="mb-2"><a href="https://github.com/twbs/rfs">RFS</a></li>
-                <li class="mb-2"><a href="https://github.com/twbs/bootstrap-npm-starter">npm starter</a></li>
-              </ul>
-            </div>
-            <div class="col-6 col-lg-2 mb-3 text-light">
-              <h5>Community</h5>
-              <ul class="list-unstyled">
-                <li class="mb-2"><a href="https://github.com/twbs/bootstrap/issues">Issues</a></li>
-                <li class="mb-2"><a href="https://github.com/twbs/bootstrap/discussions">Discussions</a></li>
-                <li class="mb-2"><a href="https://github.com/sponsors/twbs">Corporate sponsors</a></li>
-                <li class="mb-2"><a href="https://opencollective.com/bootstrap">Open Collective</a></li>
-                <li class="mb-2"><a href="https://stackoverflow.com/questions/tagged/bootstrap-5">Stack Overflow</a>
+                <li class="mb-2"><a href="https://www.facebook.com/truongduy119">Facebook</a></li>
+                <li class="mb-2"><a href="/">Instagram</a></li>
+                <li class="mb-2"><a href="/">Youtube</a></li>
+          
                 </li>
+              </ul>
+            </div>
+            <div class="col-6 col-lg-2 mb-3 text-light">
+              <h5>Khác</h5>
+              <ul class="list-unstyled">
+                <li class="mb-2"><a href="/">Project info</a></li>
+                <li class="mb-2"><a href="/">Video demo</a></li>
               </ul>
             </div>
           </div>
@@ -304,14 +294,41 @@
   </div>
 
 
-  <div id="product-forms">
-    <div id="product-form" style="display: none;">
-      Duy dep trai
-    </div>
-
 </body>
 <script th:src="@{index.js}"></script>
 <script>
+  function getCookie(name) {
+    var value = "; " + document.cookie;
+    var parts = value.split("; " + name + "=");
+    if (parts.length == 2) return parts.pop().split(";").shift();
+    else return "";
+  }
+  function checkCookie() {
+    var user = getCookie("loginInfo");
+    if (user != "") {
+      // user đã đăng nhập, ẩn button login
+      document.getElementById("login-btn").style.display = "none";
+      document.getElementById("regis-btn").style.display = "none";
+
+    } 
+  }
+
+  function deleteCookie(name) {
+    document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  }
+  document.getElementById("sign-out").addEventListener("click", function () {
+    // Xóa cookie 'loginInfo'
+    deleteCookie("loginInfo");
+    deleteCookie("loginInfoPass");
+  });
+
+
+  window.onload = function () {
+    checkCookie();
+    if(getCookie("loginInfo") == "admin@gmail.com"){
+      document.getElementById("dashboard").style.display = "block";
+    }
+  }
   //Cart button on Nav
   function goToCart() {
     window.location.href = "/cart";

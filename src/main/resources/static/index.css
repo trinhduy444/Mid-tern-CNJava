@@ -61,4 +61,10 @@
     cursor:pointer;
     overflow: hidden; 
 	}
+    footer a{
+      color: #5F9EA0;
+    }
+    footer a:hover{
+      color: #76b852;
+    }
         
